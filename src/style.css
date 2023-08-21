@@ -68,3 +68,7 @@
 .dropdown-chevron-rotate {
     @apply rotate-180;
 }
+
+.dropdown-option {
+    @apply font-manrope text-sm;
+}

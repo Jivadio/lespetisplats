@@ -47,8 +47,9 @@ export default function cardFactory(recipe) {
 
             let ingredientQuantity = document.createElement("p");
             ingredientQuantity.classList.add("ingredientQuantity");
+            let quantityText = ingredient.quantity ? ingredient.quantity : "";
             let unitText = ingredient.unit ? " " + ingredient.unit : "";
-            ingredientQuantity.textContent = ingredient.quantity + unitText;
+            ingredientQuantity.textContent = quantityText + unitText;
 
             ingredientsContainer.appendChild(div);
             div.appendChild(ingredientName);
