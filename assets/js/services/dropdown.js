@@ -1,5 +1,7 @@
 import { manageTags } from "./tag.js";
 
+let filtredTags = []
+
 function initDropdown() {
     openDropdown('ingredients');
     openDropdown('appliance');
@@ -27,7 +29,8 @@ function openDropdown(option) {
 }
 
 function closeDropdown(option) {
-    const dropdownContent = option.target.parentElement.parentElement;
+    const dropdownContent = option.target.parentElement.parentElement
+    console.log(dropdownContent);
     const dropdownChevron = option.target.parentElement.parentElement.parentElement.querySelector('.dropdown-chevron');
 
     dropdownContent.classList.remove('dropdown-open');
@@ -87,7 +90,8 @@ function optionDropdown(recipes, option) {
     return selectedOption;
 }
 
-function dropdownSearch(data, option) {
+function dropdownSearch(data, option, recipe) {
+    filtredTags = recipe;
     const dropdown = document.getElementById('dropdown-' + option + '-option');
     const dropdownSearch = document.getElementById('dropdown-search-' + option);
 
@@ -120,6 +124,10 @@ function dropdownSearch(data, option) {
                 dropdown.appendChild(option);
             });
         }
+
+        manageTags();
+
+        return option;
     })
 }
 

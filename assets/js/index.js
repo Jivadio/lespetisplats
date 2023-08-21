@@ -3,6 +3,7 @@ import { findAll, search } from "./services/recipe.js";
 import { initDropdown, optionDropdown, dropdownSearch } from "./services/dropdown.js";
 
 let card = document.querySelector(".cardFactory");
+const numberRecipes = document.getElementById("number-recipe");
 
 async function initRecipe() {
     let recipes = await findAll();
@@ -20,6 +21,8 @@ async function initRecipe() {
     dropdownSearch(filterIngredients, 'ingredients');
     dropdownSearch(filterAppliance, 'appliance');
     dropdownSearch(filterUstensils, 'ustensils');
+
+    numberRecipes.textContent = recipes.length + " recettes";
 
 }
 

@@ -2,6 +2,7 @@ import { closeDropdown } from "./dropdown.js";
 import { findAll, searchByTag } from "./recipe.js";
 
 let selectedTag = [];
+let filtredTags = [];
 
 function diplayTag(element) {
     const tags = document.getElementById("tags-container");
@@ -20,7 +21,7 @@ function diplayTag(element) {
     return tags;
 }
 
-function deleteTag(array) {
+async function deleteTag(array) {
     const deleteTag = document.querySelectorAll(".delete-tag");
 
     deleteTag.forEach(tag => {
@@ -30,9 +31,13 @@ function deleteTag(array) {
             const index = array.indexOf(tagText);
             array.splice(index, 1);
             tagContainer.remove();
+            searchByTag(array);
+
+            manageTags();
         })
     })
 
+    return array;
 }
 
 async function manageTags() {
@@ -49,12 +54,17 @@ async function manageTags() {
                     diplayTag(tag);
                 })
 
-                deleteTag(selectedTag);
                 closeDropdown(e);
-                searchByTag(selectedTag, recipes);
+
+                filtredTags = searchByTag(selectedTag, recipes);
+
+                deleteTag(selectedTag);
+                searchByTag(selectedTag);
             }
         })
     })
+
+    return filtredTags;
 }
 
 export { diplayTag, manageTags };

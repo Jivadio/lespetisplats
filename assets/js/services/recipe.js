@@ -8,6 +8,8 @@ let filterIngredients = []
 let filterAppliance = []
 let filterUstensils = []
 
+const numberRecipes = document.getElementById("number-recipe");
+
 function findAll() {
     return recipes;
 }
@@ -39,6 +41,8 @@ function search() {
 
             displayCard(filteredRecipes);
 
+            numberRecipes.textContent = filteredRecipes.length + " recettes";
+
             manageTags();
         }
     })
@@ -46,7 +50,7 @@ function search() {
 }
 
 function searchByTag(tags, recipes) {
-    recipes = filteredRecipes.length > 0 ? filteredRecipes : recipes;
+    recipes = filteredRecipes.length > 0 ? filteredRecipes : findAll();
 
     tags.forEach(tag => {
         recipes = recipes.filter(recipe =>
@@ -62,15 +66,19 @@ function searchByTag(tags, recipes) {
         )
     })
 
-    if (tags.length > 0) {
-        displayCard(recipes);
-    }
+    filterIngredients = optionDropdown(recipes, 'ingredients')
 
-    filterIngredients = DisplayOptions(recipes, 'ingredients')
+    filterAppliance = optionDropdown(recipes, 'appliance')
 
-    filterApparels = DisplayOptions(recipes, 'apparels')
+    filterUstensils = optionDropdown(recipes, 'ustensils')
 
-    filterUstensils = DisplayOptions(recipes, 'ustensils')
+    dropdownSearch(filterIngredients, 'ingredients');
+    dropdownSearch(filterAppliance, 'appliance');
+    dropdownSearch(filterUstensils, 'ustensils');
+
+    displayCard(recipes);
+
+    numberRecipes.textContent = recipes.length + " recettes";
 
     return recipes;
 }
