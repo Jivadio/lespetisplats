@@ -18,7 +18,7 @@
 }
 
 .recipeImage {
-    @apply w-full h-60 rounded-t-lg;
+    @apply w-full h-60 rounded-t-lg object-cover;
 }
 
 .cookingTime {
@@ -55,4 +55,16 @@
 
 .ingredientQuantity {
     @apply text-sm font-light text-[#7A7A7A];
+}
+
+.dropdown-close {
+    @apply hidden;
+}
+
+.dropdown-open {
+    @apply block;
+}
+
+.dropdown-chevron-rotate {
+    @apply rotate-180;
 }

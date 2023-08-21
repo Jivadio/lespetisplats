@@ -1,5 +1,6 @@
 import cardFactory from "./factories/recipe/recipe.js";
 import findAll from "./services/recipe.js";
+import initDropdown from "./services/dropdown.js";
 
 let card = document.querySelector(".cardFactory");
 
@@ -13,6 +14,7 @@ async function initRecipe() {
 
 function init() {
     initRecipe();
+    initDropdown();
 }
 
 init();
