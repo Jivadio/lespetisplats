@@ -8,3 +8,51 @@
     background-position: center;
     background-size: cover;
 }
+
+.cardContainer {
+    @apply rounded-lg bg-white font-manrope;
+}
+
+.imageContainer {
+    @apply relative;
+}
+
+.recipeImage {
+    @apply w-full h-60 rounded-t-lg;
+}
+
+.cookingTime {
+    @apply p-2 bg-[#FFD15B] rounded-full w-fit text-sm absolute top-2 right-2;
+}
+
+.contentContainer {
+    @apply py-8 px-6;
+}
+
+.recipeTitle {
+    @apply font-anton text-lg;
+}
+
+.recipeDescription1 {
+    @apply text-xs text-[#7A7A7A] font-bold mt-8 uppercase;
+}
+
+.recipeDescription2 {
+    @apply mt-4 text-sm;
+}
+
+.ingredients {
+    @apply text-xs text-[#7A7A7A] font-bold mt-8 uppercase;
+}
+
+.ingredientsContainer {
+    @apply grid grid-cols-2 mt-4 gap-4;
+}
+
+.ingredientName {
+    @apply text-sm;
+}
+
+.ingredientQuantity {
+    @apply text-sm font-light text-[#7A7A7A];
+}

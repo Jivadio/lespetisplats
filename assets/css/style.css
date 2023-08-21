@@ -593,8 +593,16 @@ video {
   margin-right: auto;
 }
 
+.mt-12 {
+  margin-top: 3rem;
+}
+
 .mt-8 {
   margin-top: 2rem;
+}
+
+.grid {
+  display: grid;
 }
 
 .h-6 {
@@ -622,6 +630,14 @@ video {
   cursor: pointer;
 }
 
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gap-12 {
+  gap: 3rem;
+}
+
 .rounded-lg {
   border-radius: 0.5rem;
 }
@@ -631,8 +647,18 @@ video {
   background-color: rgb(27 27 27 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#EDEDED\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(237 237 237 / var(--tw-bg-opacity));
+}
+
 .p-3 {
   padding: 0.75rem;
+}
+
+.px-16 {
+  padding-left: 4rem;
+  padding-right: 4rem;
 }
 
 .px-60 {
@@ -680,8 +706,22 @@ video {
   line-height: 1;
 }
 
+.text-sm {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.font-light {
+  font-weight: 300;
+}
+
 .leading-normal {
   line-height: 1.5;
+}
+
+.text-\[\#7A7A7A\] {
+  --tw-text-opacity: 1;
+  color: rgb(122 122 122 / var(--tw-text-opacity));
 }
 
 .text-\[\#FFD15B\] {
@@ -698,6 +738,97 @@ video {
   background-image: url('../img/bg_header.png');
   background-position: center;
   background-size: cover;
+}
+
+.cardContainer {
+  border-radius: 0.5rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+  font-family: Manrope, sans-serif;
+}
+
+.imageContainer {
+  position: relative;
+}
+
+.recipeImage {
+  height: 15rem;
+  width: 100%;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.cookingTime {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 9999px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 209 91 / var(--tw-bg-opacity));
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.contentContainer {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.recipeTitle {
+  font-family: Anton, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.recipeDescription1 {
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  --tw-text-opacity: 1;
+  color: rgb(122 122 122 / var(--tw-text-opacity));
+}
+
+.recipeDescription2 {
+  margin-top: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.ingredients {
+  margin-top: 2rem;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  --tw-text-opacity: 1;
+  color: rgb(122 122 122 / var(--tw-text-opacity));
+}
+
+.ingredientsContainer {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.ingredientName {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.ingredientQuantity {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  font-weight: 300;
+  --tw-text-opacity: 1;
+  color: rgb(122 122 122 / var(--tw-text-opacity));
 }
 
 .placeholder\:font-manrope::-moz-placeholder {
