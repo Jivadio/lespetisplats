@@ -1,3 +1,5 @@
+import { manageTags } from "./tag.js";
+
 function initDropdown() {
     openDropdown('ingredients');
     openDropdown('appliance');
@@ -22,6 +24,15 @@ function openDropdown(option) {
             dropdownChevron.classList.remove('dropdown-chevron-rotate');
         }
     });
+}
+
+function closeDropdown(option) {
+    const dropdownContent = option.target.parentElement.parentElement;
+    const dropdownChevron = option.target.parentElement.parentElement.parentElement.querySelector('.dropdown-chevron');
+
+    dropdownContent.classList.remove('dropdown-open');
+    dropdownContent.classList.add('dropdown-close');
+    dropdownChevron.classList.remove('dropdown-chevron-rotate');
 }
 
 function optionDropdown(recipes, option) {
@@ -71,6 +82,8 @@ function optionDropdown(recipes, option) {
         dropdown.appendChild(optionElement);
     })
 
+    manageTags();
+
     return selectedOption;
 }
 
@@ -110,4 +123,4 @@ function dropdownSearch(data, option) {
     })
 }
 
-export { initDropdown, optionDropdown, dropdownSearch };
+export { initDropdown, optionDropdown, dropdownSearch, closeDropdown };

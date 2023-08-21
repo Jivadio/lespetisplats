@@ -21,7 +21,6 @@ async function initRecipe() {
     dropdownSearch(filterAppliance, 'appliance');
     dropdownSearch(filterUstensils, 'ustensils');
 
-
 }
 
 function displayCard(recipes) {
