@@ -1,6 +1,10 @@
 import recipes from "../data/recipe.js";
-import { optionDropdown } from "./dropdown.js";
+import { optionDropdown, dropdownSearch } from "./dropdown.js";
 import { displayCard } from "../index.js";
+
+let filterIngredients = []
+let filterAppliance = []
+let filterUstensils = []
 
 function findAll() {
     return recipes;
@@ -23,9 +27,13 @@ function search() {
                 );
             });
 
-            optionDropdown(filteredRecipes, 'ingredients');
-            optionDropdown(filteredRecipes, 'appliance');
-            optionDropdown(filteredRecipes, 'ustensils');
+            filterIngredients = optionDropdown(filteredRecipes, 'ingredients');
+            filterAppliance = optionDropdown(filteredRecipes, 'appliance');
+            filterUstensils = optionDropdown(filteredRecipes, 'ustensils');
+
+            dropdownSearch(filterIngredients, 'ingredients');
+            dropdownSearch(filterAppliance, 'appliance');
+            dropdownSearch(filterUstensils, 'ustensils');
 
             displayCard(filteredRecipes);
         }

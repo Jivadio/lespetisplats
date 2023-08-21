@@ -70,6 +70,44 @@ function optionDropdown(recipes, option) {
         optionElement.textContent = option;
         dropdown.appendChild(optionElement);
     })
+
+    return selectedOption;
 }
 
-export { initDropdown, optionDropdown };
+function dropdownSearch(data, option) {
+    const dropdown = document.getElementById('dropdown-' + option + '-option');
+    const dropdownSearch = document.getElementById('dropdown-search-' + option);
+
+    dropdownSearch.addEventListener('keyup', (e) => {
+        const searchString = e.target.value.toLowerCase();
+
+        if (searchString.length > 2) {
+            const filteredData = data.filter((data) => {
+                return data.toLowerCase().includes(searchString);
+            });
+
+            dropdown.innerHTML = '';
+
+            filteredData.forEach(data => {
+                let option = document.createElement('p');
+                option.classList.add('dropdown-option');
+                option.textContent = data;
+
+                dropdown.appendChild(option);
+            });
+        }
+        else {
+            dropdown.innerHTML = '';
+
+            data.forEach(data => {
+                let option = document.createElement('p');
+                option.classList.add('dropdown-option');
+                option.textContent = data;
+
+                dropdown.appendChild(option);
+            });
+        }
+    })
+}
+
+export { initDropdown, optionDropdown, dropdownSearch };
