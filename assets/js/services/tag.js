@@ -3,9 +3,9 @@ import { findAll, searchByTag } from "./recipe.js";
 
 let selectedTag = [];
 let filtredTags = [];
+const tags = document.querySelector("#tags-container");
 
 function diplayTag(element) {
-    const tags = document.getElementById("tags-container");
     const tag = document.createElement("div");
     tag.classList.add("tag-container");
     tag.innerHTML = element.charAt(0).toUpperCase() + element.slice(1);
@@ -47,8 +47,10 @@ async function manageTags() {
     dropdownOption.forEach(option => {
         option.addEventListener("click", (e) => {
             if (!selectedTag.includes(e.target.textContent.toLowerCase())) {
-                selectedTag = [];
                 selectedTag.push(e.target.textContent);
+
+                const tags = document.querySelector("#tags-container");
+                tags.innerHTML = "";
 
                 selectedTag.forEach(tag => {
                     diplayTag(tag);

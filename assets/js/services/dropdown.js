@@ -30,7 +30,6 @@ function openDropdown(option) {
 
 function closeDropdown(option) {
     const dropdownContent = option.target.parentElement.parentElement
-    console.log(dropdownContent);
     const dropdownChevron = option.target.parentElement.parentElement.parentElement.querySelector('.dropdown-chevron');
 
     dropdownContent.classList.remove('dropdown-open');

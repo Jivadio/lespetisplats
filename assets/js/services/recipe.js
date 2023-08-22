@@ -7,6 +7,7 @@ let filteredRecipes = []
 let filterIngredients = []
 let filterAppliance = []
 let filterUstensils = []
+let selectedTag = [];
 
 const numberRecipes = document.getElementById("number-recipe");
 
@@ -19,9 +20,10 @@ function search() {
 
     searchBar.addEventListener("keyup", (e) => {
         const searchString = e.target.value.toLowerCase();
+        let baseRecipes = selectedTag.length > 0 ? filteredRecipes : recipes; // Utilisez filteredRecipes si des tags sont sélectionnés
 
         if (searchString.length > 2) {
-            filteredRecipes = recipes.filter((recipe) => {
+            filteredRecipes = baseRecipes.filter((recipe) => {
                 return (
                     recipe.name.toLowerCase().includes(searchString) ||
                     recipe.description.toLowerCase().includes(searchString) ||
@@ -31,28 +33,43 @@ function search() {
                 );
             });
 
-            filterIngredients = optionDropdown(filteredRecipes, 'ingredients');
-            filterAppliance = optionDropdown(filteredRecipes, 'appliance');
-            filterUstensils = optionDropdown(filteredRecipes, 'ustensils');
-
-            dropdownSearch(filterIngredients, 'ingredients');
-            dropdownSearch(filterAppliance, 'appliance');
-            dropdownSearch(filterUstensils, 'ustensils');
-
-            displayCard(filteredRecipes);
-
-            numberRecipes.textContent = filteredRecipes.length + " recettes";
-
-            manageTags();
         }
+        else {
+            filteredRecipes = baseRecipes.filter((recipe) => {
+                return (
+                    recipe.name.toLowerCase().includes('') ||
+                    recipe.description.toLowerCase().includes('') ||
+                    recipe.ingredients.some((ingredient) => {
+                        return ingredient.ingredient.toLowerCase().includes('');
+                    })
+                );
+            });
+        }
+
+        filterIngredients = optionDropdown(filteredRecipes, 'ingredients');
+        filterAppliance = optionDropdown(filteredRecipes, 'appliance');
+        filterUstensils = optionDropdown(filteredRecipes, 'ustensils');
+
+        dropdownSearch(filterIngredients, 'ingredients');
+        dropdownSearch(filterAppliance, 'appliance');
+        dropdownSearch(filterUstensils, 'ustensils');
+
+        searchByTag(selectedTag, filteredRecipes);
+
+        numberRecipes.textContent = filteredRecipes.length + " recettes";
+
+        manageTags();
     })
 
 }
 
 function searchByTag(tags, recipes) {
+    selectedTag = tags;
+    console.log(selectedTag);
+    console.log(recipes);
     recipes = filteredRecipes.length > 0 ? filteredRecipes : findAll();
 
-    tags.forEach(tag => {
+    selectedTag.forEach(tag => {
         recipes = recipes.filter(recipe =>
             recipe.ingredients.some((ingredient) => {
                 return ingredient.ingredient.toLowerCase().includes(tag);
