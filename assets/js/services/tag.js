@@ -58,7 +58,7 @@ async function manageTags() {
 
                 closeDropdown(e);
 
-                filtredTags = searchByTag(selectedTag, recipes);
+                filtredTags = searchByTag(selectedTag);
 
                 deleteTag(selectedTag);
                 searchByTag(selectedTag);

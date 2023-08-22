@@ -54,7 +54,7 @@ function search() {
         dropdownSearch(filterAppliance, 'appliance');
         dropdownSearch(filterUstensils, 'ustensils');
 
-        searchByTag(selectedTag, filteredRecipes);
+        searchByTag(selectedTag);
 
         numberRecipes.textContent = filteredRecipes.length + " recettes";
 
@@ -65,10 +65,11 @@ function search() {
 
 function searchByTag(tags) {
     selectedTag = tags;
-    tagRecipe = filteredRecipes.length > 0 ? filteredRecipes : findAll();
+    let tagRecipe = filteredRecipes.length > 0 ? filteredRecipes : findAll();
+
 
     selectedTag.forEach(tag => {
-        filteredRecipes = filteredRecipes.filter(recipe =>
+        tagRecipe = tagRecipe.filter(recipe =>
             recipe.ingredients.some((ingredient) => {
                 return ingredient.ingredient.toLowerCase().includes(tag);
             })
@@ -81,21 +82,21 @@ function searchByTag(tags) {
         )
     })
 
-    filterIngredients = optionDropdown(filteredRecipes, 'ingredients')
+    filterIngredients = optionDropdown(tagRecipe, 'ingredients')
 
-    filterAppliance = optionDropdown(filteredRecipes, 'appliance')
+    filterAppliance = optionDropdown(tagRecipe, 'appliance')
 
-    filterUstensils = optionDropdown(filteredRecipes, 'ustensils')
+    filterUstensils = optionDropdown(tagRecipe, 'ustensils')
 
     dropdownSearch(filterIngredients, 'ingredients');
     dropdownSearch(filterAppliance, 'appliance');
     dropdownSearch(filterUstensils, 'ustensils');
 
-    displayCard(filteredRecipes);
+    displayCard(tagRecipe);
 
-    numberRecipes.textContent = filteredRecipes.length + " recettes";
+    numberRecipes.textContent = tagRecipe.length + " recettes";
 
-    return filteredRecipes;
+    return tagRecipe;
 }
 
 export { findAll, search, searchByTag };
