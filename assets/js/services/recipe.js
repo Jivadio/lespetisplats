@@ -20,7 +20,7 @@ function search() {
 
     searchBar.addEventListener("keyup", (e) => {
         const searchString = e.target.value.toLowerCase();
-        let baseRecipes = selectedTag.length > 0 ? filteredRecipes : recipes; // Utilisez filteredRecipes si des tags sont sélectionnés
+        let baseRecipes = selectedTag.length > 0 ? filteredRecipes : findAll();
 
         if (searchString.length > 2) {
             filteredRecipes = baseRecipes.filter((recipe) => {
@@ -63,14 +63,12 @@ function search() {
 
 }
 
-function searchByTag(tags, recipes) {
+function searchByTag(tags) {
     selectedTag = tags;
-    console.log(selectedTag);
-    console.log(recipes);
-    recipes = filteredRecipes.length > 0 ? filteredRecipes : findAll();
+    tagRecipe = filteredRecipes.length > 0 ? filteredRecipes : findAll();
 
     selectedTag.forEach(tag => {
-        recipes = recipes.filter(recipe =>
+        filteredRecipes = filteredRecipes.filter(recipe =>
             recipe.ingredients.some((ingredient) => {
                 return ingredient.ingredient.toLowerCase().includes(tag);
             })
@@ -83,21 +81,21 @@ function searchByTag(tags, recipes) {
         )
     })
 
-    filterIngredients = optionDropdown(recipes, 'ingredients')
+    filterIngredients = optionDropdown(filteredRecipes, 'ingredients')
 
-    filterAppliance = optionDropdown(recipes, 'appliance')
+    filterAppliance = optionDropdown(filteredRecipes, 'appliance')
 
-    filterUstensils = optionDropdown(recipes, 'ustensils')
+    filterUstensils = optionDropdown(filteredRecipes, 'ustensils')
 
     dropdownSearch(filterIngredients, 'ingredients');
     dropdownSearch(filterAppliance, 'appliance');
     dropdownSearch(filterUstensils, 'ustensils');
 
-    displayCard(recipes);
+    displayCard(filteredRecipes);
 
-    numberRecipes.textContent = recipes.length + " recettes";
+    numberRecipes.textContent = filteredRecipes.length + " recettes";
 
-    return recipes;
+    return filteredRecipes;
 }
 
 export { findAll, search, searchByTag };
