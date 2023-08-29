@@ -21,30 +21,44 @@ function search() {
     searchBar.addEventListener("keyup", (e) => {
         const searchString = e.target.value.toLowerCase();
         let baseRecipes = selectedTag.length > 0 ? filteredRecipes : findAll();
+        let newFilteredRecipes = [];
 
-        if (searchString.length > 2) {
-            filteredRecipes = baseRecipes.filter((recipe) => {
-                return (
-                    recipe.name.toLowerCase().includes(searchString) ||
-                    recipe.description.toLowerCase().includes(searchString) ||
-                    recipe.ingredients.some((ingredient) => {
-                        return ingredient.ingredient.toLowerCase().includes(searchString);
-                    })
-                );
-            });
+        for (let i = 0; i < baseRecipes.length; i++) {
+            let recipe = baseRecipes[i];
+            let includeRecipe = false;
 
+            if (searchString.length > 2) {
+                if (recipe.name.toLowerCase().includes(searchString) ||
+                    recipe.description.toLowerCase().includes(searchString)) {
+                    includeRecipe = true;
+                } else {
+                    for (let j = 0; j < recipe.ingredients.length; j++) {
+                        if (recipe.ingredients[j].ingredient.toLowerCase().includes(searchString)) {
+                            includeRecipe = true;
+                            break;
+                        }
+                    }
+                }
+            } else {
+                if (recipe.name.toLowerCase().includes('') ||
+                    recipe.description.toLowerCase().includes('')) {
+                    includeRecipe = true;
+                } else {
+                    for (let j = 0; j < recipe.ingredients.length; j++) {
+                        if (recipe.ingredients[j].ingredient.toLowerCase().includes('')) {
+                            includeRecipe = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (includeRecipe) {
+                newFilteredRecipes.push(recipe);
+            }
         }
-        else {
-            filteredRecipes = baseRecipes.filter((recipe) => {
-                return (
-                    recipe.name.toLowerCase().includes('') ||
-                    recipe.description.toLowerCase().includes('') ||
-                    recipe.ingredients.some((ingredient) => {
-                        return ingredient.ingredient.toLowerCase().includes('');
-                    })
-                );
-            });
-        }
+
+        filteredRecipes = newFilteredRecipes;
 
         filterIngredients = optionDropdown(filteredRecipes, 'ingredients');
         filterAppliance = optionDropdown(filteredRecipes, 'appliance');
@@ -59,38 +73,30 @@ function search() {
         numberRecipes.textContent = filteredRecipes.length + " recettes";
 
         manageTags();
-    })
-
+    });
 }
 
 function searchByTag(tags) {
-    selectedTag = tags;
+    let selectedTag = tags;
     let tagRecipe = filteredRecipes.length > 0 ? filteredRecipes : findAll();
 
-
-    selectedTag.forEach(tag => {
+    for (let i = 0; i < selectedTag.length; i++) {
+        let tag = selectedTag[i];
         tagRecipe = tagRecipe.filter(recipe =>
-            recipe.ingredients.some((ingredient) => {
-                return ingredient.ingredient.toLowerCase().includes(tag);
-            })
+            recipe.ingredients.some(ingredient => ingredient.ingredient.toLowerCase().includes(tag))
             ||
             recipe.appliance.toLowerCase().includes(tag)
             ||
-            recipe.ustensils.some((ustensils) => {
-                return ustensils.toLowerCase().includes(tag);
-            })
-        )
-    })
+            recipe.ustensils.some(ustensil => ustensil.toLowerCase().includes(tag))
+        );
+    }
 
-    filterIngredients = optionDropdown(tagRecipe, 'ingredients')
-
-    filterAppliance = optionDropdown(tagRecipe, 'appliance')
-
-    filterUstensils = optionDropdown(tagRecipe, 'ustensils')
-
-    dropdownSearch(filterIngredients, 'ingredients');
-    dropdownSearch(filterAppliance, 'appliance');
-    dropdownSearch(filterUstensils, 'ustensils');
+    let types = ['ingredients', 'appliance', 'ustensils'];
+    for (let i = 0; i < types.length; i++) {
+        let type = types[i];
+        let filterResult = optionDropdown(tagRecipe, type);
+        dropdownSearch(filterResult, type);
+    }
 
     displayCard(tagRecipe);
 
@@ -98,5 +104,6 @@ function searchByTag(tags) {
 
     return tagRecipe;
 }
+
 
 export { findAll, search, searchByTag };

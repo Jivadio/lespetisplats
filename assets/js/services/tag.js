@@ -1,5 +1,5 @@
 import { closeDropdown } from "./dropdown.js";
-import { findAll, searchByTag } from "./recipe.js";
+import { searchByTag } from "./recipe.js";
 
 let selectedTag = [];
 let filtredTags = [];
@@ -42,7 +42,6 @@ async function deleteTag(array) {
 
 async function manageTags() {
     const dropdownOption = document.querySelectorAll(".dropdown-option");
-    let recipes = await findAll();
 
     dropdownOption.forEach(option => {
         option.addEventListener("click", (e) => {

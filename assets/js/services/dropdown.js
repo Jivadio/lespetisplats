@@ -1,7 +1,5 @@
 import { manageTags } from "./tag.js";
 
-let filtredTags = []
-
 function initDropdown() {
     openDropdown('ingredients');
     openDropdown('appliance');
@@ -89,8 +87,7 @@ function optionDropdown(recipes, option) {
     return selectedOption;
 }
 
-function dropdownSearch(data, option, recipe) {
-    filtredTags = recipe;
+function dropdownSearch(data, option) {
     const dropdown = document.getElementById('dropdown-' + option + '-option');
     const dropdownSearch = document.getElementById('dropdown-search-' + option);
 
