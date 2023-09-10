@@ -12,7 +12,7 @@ export default function cardFactory(recipe) {
 
     function createCard() {
         cardContainer.classList.add("cardContainer");
-        cardContainer.setAttribute("id", "1");
+        cardContainer.setAttribute("id", recipe.id);
 
         imageContainer.classList.add("imageContainer");
         image.classList.add("recipeImage");

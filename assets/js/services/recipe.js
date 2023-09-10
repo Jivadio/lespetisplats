@@ -9,11 +9,13 @@ let filterAppliance = []
 let filterUstensils = []
 let selectedTag = [];
 
-const numberRecipes = document.getElementById("number-recipe");
-
 function findAll() {
     return recipes;
 }
+
+const numberRecipes = document.getElementById("number-recipe");
+const containerCard = document.getElementsByClassName("cardFactory");
+const noRecipeVar = document.getElementById("no-recipe");
 
 function search() {
     const searchBar = document.getElementById("searchbar");
@@ -45,6 +47,15 @@ function search() {
                 );
             });
         }
+
+        if (filteredRecipes.length == 0) {
+            noRecipe(searchString);
+        }
+        else {
+            containerCard[0].style.display = "grid";
+            noRecipeVar.style.display = "none";
+        }
+
 
         filterIngredients = optionDropdown(filteredRecipes, 'ingredients');
         filterAppliance = optionDropdown(filteredRecipes, 'appliance');
@@ -97,6 +108,13 @@ function searchByTag(tags) {
     numberRecipes.textContent = tagRecipe.length + " recettes";
 
     return tagRecipe;
+}
+
+function noRecipe(value) {
+    console.log(value);
+    noRecipeVar.textContent = "Aucune recette ne contient '" + value + "', vous pouvez chercher « tarte aux pommes », « poisson », etc...";
+    containerCard[0].style.display = "none";
+    noRecipeVar.style.display = "block";
 }
 
 export { findAll, search, searchByTag };
