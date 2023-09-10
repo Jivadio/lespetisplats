@@ -1,44 +1,47 @@
 import cardFactory from "./factories/recipe/recipe.js";
 import { findAll, search } from "./services/recipe.js";
-import { initDropdown, optionDropdown, dropdownSearch } from "./services/dropdown.js";
+import {
+  initDropdown,
+  optionDropdown,
+  dropdownSearch,
+} from "./services/dropdown.js";
 
 let card = document.querySelector(".cardFactory");
 const numberRecipes = document.getElementById("number-recipe");
 
 async function initRecipe() {
-    let recipes = await findAll();
+  let recipes = await findAll();
 
-    recipes.forEach(recipe => {
-        let cardRecipeFactory = cardFactory(recipe);
-        let cardDOM = cardRecipeFactory.createCard();
-        card.appendChild(cardDOM);
-    });
+  recipes.forEach((recipe) => {
+    let cardRecipeFactory = cardFactory(recipe);
+    let cardDOM = cardRecipeFactory.createCard();
+    card.appendChild(cardDOM);
+  });
 
-    let filterIngredients = optionDropdown(recipes, 'ingredients');
-    let filterAppliance = optionDropdown(recipes, 'appliance');
-    let filterUstensils = optionDropdown(recipes, 'ustensils');
+  let filterIngredients = optionDropdown(recipes, "ingredients");
+  let filterAppliance = optionDropdown(recipes, "appliance");
+  let filterUstensils = optionDropdown(recipes, "ustensils");
 
-    dropdownSearch(filterIngredients, 'ingredients');
-    dropdownSearch(filterAppliance, 'appliance');
-    dropdownSearch(filterUstensils, 'ustensils');
+  dropdownSearch(filterIngredients, "ingredients");
+  dropdownSearch(filterAppliance, "appliance");
+  dropdownSearch(filterUstensils, "ustensils");
 
-    numberRecipes.textContent = recipes.length + " recettes";
-
+  numberRecipes.textContent = recipes.length + " recettes";
 }
 
 function displayCard(recipes) {
-    card.innerHTML = "";
-    recipes.forEach(recipe => {
-        let cardRecipeFactory = cardFactory(recipe);
-        let cardDOM = cardRecipeFactory.createCard();
-        card.appendChild(cardDOM);
-    });
+  card.innerHTML = "";
+  recipes.forEach((recipe) => {
+    let cardRecipeFactory = cardFactory(recipe);
+    let cardDOM = cardRecipeFactory.createCard();
+    card.appendChild(cardDOM);
+  });
 }
 
 function init() {
-    initRecipe();
-    initDropdown();
-    search();
+  initRecipe();
+  initDropdown();
+  search();
 }
 
 init();
